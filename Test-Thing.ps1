@@ -8,7 +8,7 @@
 				   $success = $true
 					
                 } 
-            catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] {
+            catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] { # Specific error - $Error[0].Exception.GetType().FullName
                    Write-Warning -Message "Thing didn't happen in $([math]::Round($sw.elapsed.TotalSeconds)) seconds."
                    start-sleep -seconds 5
                 }
