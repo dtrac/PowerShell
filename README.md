@@ -7,3 +7,4 @@ Various PowerShell scripts.  e.g:
 
 ## vCenter API (via PowerCLI)
   * Check currency of vSphere templates
+  * Configure VM DRS groups based on Host tags (e.g. for Licensing)
