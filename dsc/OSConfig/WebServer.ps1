@@ -2,7 +2,7 @@
     .NAME
         WebServer.ps1
     .SYNOPSIS
-        Uses PowerShell DSC to configure a Certify Web Server 
+        Uses PowerShell DSC to configure a Web Server 
     .AUTHOR
         Dan Tracey
     .DATE
