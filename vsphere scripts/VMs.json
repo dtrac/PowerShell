@@ -1,0 +1,22 @@
+{
+    "vms": [
+        {
+            "vmName": "VM1",
+            "role": "BizTalk Server",
+            "vSphereCluster": "Cluster1",
+            "vSphereTemplate": "Win2016",
+            "resourcePool": "DEV SERVERS",
+            "folder": "Demo",
+            "datastore": "DS1",
+            "portgroup": "dv_vlan1",
+            "vCPU": 2,
+            "memoryGb": 8,
+            "additionalDisks": [
+                {
+                    "driveLetter": "D",
+                    "driveSizeGb": "20"
+                }
+            ]
+        }
+      ]
+ }
