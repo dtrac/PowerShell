@@ -14,11 +14,18 @@ $pw
 $encPw | Export-Clixml -Path 'C:\Password.xml'
 ```
 
-## Create a single set of creds
+## Create a single set of creds interactively
 ```
 $creds = Get-Credential -Message 'Enter creds'
 $creds
 ```
+
+## Create a single set of creds with a password string
+```
+$secPass = ConvertTo-SecureString -String $password -AsPlainText -Force
+$creds = New-Object System.Management.Automation.PSCredential($OctopusParameters[$user,$secPass)
+```
+
 ## ...and store as an xml file.
 ```
 $creds | Export-Clixml -Path 'C:\creds.xml'
