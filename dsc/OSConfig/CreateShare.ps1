@@ -2,7 +2,7 @@
     .NAME
         CreateShare.ps1
     .SYNOPSIS
-        Uses PowerShell DSC to create and share the DAS Scheduler folder
+        Uses PowerShell DSC to create and share a folder
     .AUTHOR
         Dan Tracey
     .DATE
