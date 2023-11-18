@@ -1,0 +1,17 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Install-Module -Name PSScriptAnalyzer -Force
+      $filesToAnalyze = Get-ChildItem -Path $(System.DefaultWorkingDirectory)\scripts -Recurse -Include *.ps1,*.psm1
+      foreach ($file in $filesToAnalyze) {
+        Write-Host "Analyzing file: $($file.FullName)"
+        Invoke-ScriptAnalyzer -Path $file.FullName
+      }
