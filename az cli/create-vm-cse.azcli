@@ -52,4 +52,4 @@ az vm extension set \
   --vm-name MyRHELVM \
   --name CustomScript \
   --publisher Microsoft.Azure.Extensions \
-  --settings '{"fileUris": ["<URL_TO_YOUR_SCRIPT>"], "commandToExecute": "bash write_file.sh"}'
+  --settings '{"fileUris": ["https://raw.githubusercontent.com/dtrac/PowerShell/refs/heads/master/az%20cli/write_file.sh"], "commandToExecute": "bash write_file.sh"}'
