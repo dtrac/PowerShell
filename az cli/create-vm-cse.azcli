@@ -1,0 +1,55 @@
+# pre-req - connect to Azure
+az login
+# Step 1: Create a Resource Group
+az group create --name dantcsetest --location swedencentral
+
+# Step 2: Create a Virtual Network and Subnet
+az network vnet create \
+  --resource-group dantcsetest \
+  --name MyVnet \
+  --subnet-name MySubnet
+
+# Step 3: Create a Network Security Group and Rules
+az network nsg create --resource-group dantcsetest --name MyNSG
+
+az network nsg rule create \
+  --resource-group dantcsetest \
+  --nsg-name MyNSG \
+  --name AllowSSH \
+  --priority 1000 \
+  --protocol Tcp \
+  --destination-port-ranges 22
+
+# Step 4: Create a Public IP and NIC
+az network public-ip create --resource-group dantcsetest --name MyPublicIP
+
+az network nic create \
+  --resource-group dantcsetest \
+  --name MyNic \
+  --vnet-name MyVnet \
+  --subnet MySubnet \
+  --network-security-group MyNSG \
+  --public-ip-address MyPublicIP
+
+# Step 5: Create the RHEL Virtual Machine
+az vm create \
+  --resource-group dantcsetest \
+  --name MyRHELVM \
+  --image RedHat:RHEL:8_7:latest \
+  --size Standard_B1s \
+  --admin-username azureuser \
+  --ssh-key-values @keys/publickey.pub \
+  --nics MyNic
+
+# Step 6: Install a Custom Script Extension
+# Create a script named 'write_file.sh' with the following content:
+# #!/bin/bash
+# echo "This is a test file created by the custom script extension" > /etc/testfile.txt
+
+# Upload the script to a storage account or host it publicly and replace <URL_TO_YOUR_SCRIPT> below with the script URL.
+az vm extension set \
+  --resource-group dantcsetest \
+  --vm-name MyRHELVM \
+  --name CustomScript \
+  --publisher Microsoft.Azure.Extensions \
+  --settings '{"fileUris": ["<URL_TO_YOUR_SCRIPT>"], "commandToExecute": "bash write_file.sh"}'
